@@ -20,7 +20,7 @@ Submitted by Roodley Kerby Antoine
 
 ## Flix Part 1
 
-- [x] User can view a list of movies (title, poster image, and overview) currently playing in theaters from the Movie Database API.
+- [x] User can view a list of movies (title, poster image, and overview) currently playing in theaters from the Movie Database API
 
 #### BONUS
 - [x] Views should be responsive for both landscape/portrait mode.
