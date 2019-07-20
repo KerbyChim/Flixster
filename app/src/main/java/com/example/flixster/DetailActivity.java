@@ -84,10 +84,11 @@ public class DetailActivity extends YouTubeBaseActivity {
                 Log.d("smile", "on init success");
                 //mVideoView.start();
                 //youTubePlayer.loadVideo(youtubekey);
-                if (movie.getVoteAverage() >= 5)
+                if (movie.getVoteAverage() > 5)
                 {
                     youTubePlayer.loadVideo(youtubekey);
                 }
+
                 else {
                     youTubePlayer.cueVideo(youtubekey);
                 }
