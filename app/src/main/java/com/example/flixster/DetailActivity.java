@@ -28,6 +28,7 @@ public class DetailActivity extends YouTubeBaseActivity {
     private static final String YOUTUBE_API_KEY = "AIzaSyDjUTVXdhNC8OcAEU3Hkqf_dxOFKkMJSm8";
     private static final String TRAILERS_API = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
+
     TextView tvTitle;
     TextView tvOverview;
     RatingBar ratingBar;
@@ -44,6 +45,8 @@ public class DetailActivity extends YouTubeBaseActivity {
         tvOverview = findViewById(R.id.tvOverview);
         ratingBar = findViewById(R.id.ratingBar);
         youTubePlayerView  = findViewById(R.id.player);
+
+
 
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra("movie"));
         tvTitle.setText(movie.getTitle());
@@ -79,13 +82,22 @@ public class DetailActivity extends YouTubeBaseActivity {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 Log.d("smile", "on init success");
-                youTubePlayer.cueVideo(youtubekey);
+                //mVideoView.start();
+                //youTubePlayer.loadVideo(youtubekey);
+                if (movie.getVoteAverage() >= 5)
+                {
+                    youTubePlayer.loadVideo(youtubekey);
+                }
+                else {
+                    youTubePlayer.cueVideo(youtubekey);
+                }
             }
 
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
                 Log.d("smile", "on init failure");
             }
+
         });
     }
 }
