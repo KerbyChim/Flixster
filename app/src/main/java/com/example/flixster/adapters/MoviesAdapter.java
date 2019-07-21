@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.flixster.DetailActivity;
+import com.example.flixster.GlideApp;
 import com.example.flixster.R;
 import com.example.flixster.models.Movie;
 
@@ -25,13 +26,18 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
    Context context;
    List<Movie> movies;
+    int radius = 110; // corner radius, higher value = more rounded
+    int margin = 10; // crop margin, set to 0 for corners with no crop
 
     public MoviesAdapter(Context context, List<Movie> movies) {
         this.context = context;
         this.movies = movies;
+
     }
 
     @NonNull
@@ -68,6 +74,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
             container = itemView.findViewById(R.id.container);
+
         }
 
         public void bind(final Movie movie) {
@@ -81,6 +88,22 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
             //String imageUrl = movie.getPosterPath();
            Glide.with(context).load(imageUrl).into(ivPoster);
+
+
+
+            GlideApp.with(context).load(imageUrl).transform(new RoundedCornersTransformation(radius, margin))
+                    .into(ivPoster);
+
+            /*GlideApp.with(context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.imagenotfound)
+                    .into(ivPoster);*/
+
+
+
+
+
             //Add click listener on the whole row
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -89,6 +112,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
                     Intent i = new Intent(context, DetailActivity.class);
                     i.putExtra("movie", Parcels.wrap(movie));
                     context.startActivity(i);
+
                 }
             });
         }

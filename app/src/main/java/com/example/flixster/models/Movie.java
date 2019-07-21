@@ -17,6 +17,7 @@ public class Movie {
     String title;
     String overview;
     String backdropPath;
+    //String
 
     // empty constructor needed by the Parceler library
     public Movie() {

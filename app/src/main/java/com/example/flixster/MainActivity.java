@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.flixster.adapters.MoviesAdapter;
 import com.example.flixster.models.Movie;
 import com.loopj.android.http.AsyncHttpClient;
@@ -46,6 +48,10 @@ List<Movie> movies;
         rvMovies.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rvMovies.setAdapter(adapter);
 
+
+
+
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(MOVIE_URL, new JsonHttpResponseHandler(){
             @Override
@@ -65,6 +71,7 @@ List<Movie> movies;
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
+
         });
 
     }
